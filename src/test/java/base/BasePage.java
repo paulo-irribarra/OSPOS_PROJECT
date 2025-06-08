@@ -14,6 +14,17 @@ public class BasePage {
     private static WebDriver driver;
     protected WebDriverWait wait;
 
+    // Constructor
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // espera de 10 seg
+    }
+
+    // CLICK PASANDO UN WEBELEMENT POR PARAMETRO
+    protected void click(WebElement element) {
+        waitForVisibility(element).click();
+    }
+
     // Inicializa el driver si aún no existe
     public static void initializeDriver() {
         if (driver == null) {
@@ -36,19 +47,10 @@ public class BasePage {
         }
     }
 
-    // Constructor
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // espera de 10 seg
+    // Espera a que un elemento esté visible (por WebElement)
+    protected WebElement waitForVisibility(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    // Espera hasta que un elemento esté visible
-    protected WebElement waitForVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
 
-    // Obtener texto de un elemento
-    protected String getText(By locator) {
-        return waitForVisibility(locator).getText();
-    }
 }

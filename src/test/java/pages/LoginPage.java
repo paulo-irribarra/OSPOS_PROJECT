@@ -25,6 +25,14 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//button[@name='login-button']")
     private WebElement btnIngresar;
 
+    @FindBy(xpath = "//div[@class='error']")
+    private WebElement mensajeCredencialesInvalidas;
+
+    public boolean isVisibleMensajeError(){
+        waitForVisibility(mensajeCredencialesInvalidas);
+        return mensajeCredencialesInvalidas.isEnabled();
+    }
+
     public boolean isVisibleImgLogin(){
         waitForVisibility(imgLogin);
         return imgLogin.isDisplayed();

@@ -34,8 +34,8 @@ public class LoginDefinition {
         loginPage.sendKeysInputPass(pass);
     }
 
-    @And("presiona el botón de login")
-    public void presionaElBotónDeLogin() {
+    @And("presiona el botón de ingresar")
+    public void presionaElBotónDeIngresar() {
         loginPage.clickBtnIngresar();
     }
 
@@ -43,4 +43,10 @@ public class LoginDefinition {
     public void deberíaVerLaPáginaDeInicio() {
         Assert.assertTrue("La Imagen del Home no se esta mostrando :(", homePage.isVisibleImgHome() );
     }
+
+    @Then("validar el mensaje de login incorrecto")
+    public void validarElMensajeDeLoginIncorrecto() {
+        Assert.assertTrue("No se visualiza el mensaje de error", loginPage.isVisibleMensajeError());
+    }
+
 }

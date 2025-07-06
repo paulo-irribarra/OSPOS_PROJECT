@@ -3,7 +3,7 @@ Feature: Login
   Scenario Outline: Login con diferentes credenciales
     Given Entro al portal "http://localhost/ospos/public/login"
     When ingresa usuario "<usuario>" y contraseña "<clave>"
-    And presiona el botón de login
+    And presiona el botón de ingresar
     Then debería ver la página de inicio
 
     Examples:
@@ -14,4 +14,5 @@ Feature: Login
   Scenario: Login con Contraseña invalida
     Given Entro al portal "http://localhost/ospos/public/login"
     When ingresa usuario "admin" y contraseña "CryBaby"
+    And presiona el botón de login
     Then validar el mensaje de login incorrecto

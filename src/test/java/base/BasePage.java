@@ -49,8 +49,21 @@ public class BasePage {
 
     // Espera a que un elemento esté visible (por WebElement)
     protected WebElement waitForVisibility(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (Exception e) {
+            throw new RuntimeException("Elemento no visible después del tiempo de espera: " + element, e);
+        }
     }
+
+    protected WebElement waitForVisibility(By locator) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        } catch (Exception e) {
+            throw new RuntimeException("Elemento no localizado: " + locator, e);
+        }
+    }
+
 
 
 }

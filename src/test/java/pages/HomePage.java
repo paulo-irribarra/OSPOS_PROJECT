@@ -1,9 +1,11 @@
 package pages;
 
 import base.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends BasePage {
 
@@ -11,7 +13,8 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        org.openqa.selenium.support.PageFactory.initElements(driver, this);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//a[@class='navbar-brand hidden-sm']")
@@ -22,7 +25,13 @@ public class HomePage extends BasePage {
         return imgHome.isEnabled();
     }
 
-    //a[@class='navbar-brand hidden-sm']
+    public void clickOpcionMenu(String opcion){
+        String xpath = "//a[@title='"+opcion+"']";
+        waitForVisibility(By.xpath(xpath));
+        WebElement btnNavBar = driver.findElement(By.xpath(xpath));
+        btnNavBar.click();
+    }
+
 
 
 }

@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Key;
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.Map;
 
@@ -36,7 +34,17 @@ public class VentasPage extends BasePage {
     @FindBy(xpath = "//div[@id='sale_id']")
     private WebElement boleta;
 
-    public void agregraArticuloAlCarrito(Map<String, String> dataTable){
+    @FindBy(xpath = "(//input[@name='submit'])[1]")
+    private WebElement btnRetomar;
+
+    @FindBy(xpath = "//div[@class='bootstrap-dialog-header']")
+    private WebElement modalVenatsSuspendidas;
+
+    @FindBy(xpath = "//button[@id='show_suspended_sales_button']")
+    private WebElement btnSuspendidas;
+
+
+    public void realizarVenta(Map<String, String> dataTable){
         Actions actions = new Actions(driver);
         esperarElementoListo(inputBuscarArticulo,20);
         actions.moveToElement(inputBuscarArticulo).click().sendKeys(dataTable.get("1 Artículo")).sendKeys(Keys.ENTER).build().perform();
@@ -61,8 +69,38 @@ public class VentasPage extends BasePage {
         return boleta.isEnabled();
     }
 
+    public void agregarArticuloAlCarro(Map<String, String> dataTable){
+        Actions actions = new Actions(driver);
+        esperarElementoListo(inputBuscarArticulo,20);
+        actions.moveToElement(inputBuscarArticulo).click().sendKeys(dataTable.get("1 Artículo")).sendKeys(Keys.ENTER).build().perform();
 
+        By xpath = By.xpath("//td[normalize-space()='" + dataTable.get("1 Artículo") + "']");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement celda = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
+        Assert.assertEquals("El texto encontrado no coincide", dataTable.get("1 Artículo"), celda.getText().trim());
+        System.out.println(dataTable.get("1 Artículo"));
 
+    }
 
+    public void clickBtnSuspender(){
+        WebElement btnSuspender = driver.findElement(By.xpath("//div[@id='suspend_sale_button']"));
+        clickbtn(btnSuspender);
+    }
 
+    public boolean isVisibleModalSuspendidas(){
+        esperarElementoListo(modalVenatsSuspendidas, 10);
+        return modalVenatsSuspendidas.isEnabled();
+    }
+
+    public void clickBtnRetomar(){
+        esperarElementoListo(btnRetomar,10);
+        btnRetomar.click();
+
+    }
+
+    public void clickbtnSuspendidas(){
+        esperarElementoListo(btnSuspendidas,10);
+        btnSuspendidas.click();
+
+    }
 }

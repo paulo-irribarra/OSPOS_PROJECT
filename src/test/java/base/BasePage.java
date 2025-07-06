@@ -76,7 +76,9 @@ public class BasePage {
     }
 
     public void clickbtn(WebElement webElement){
+        esperarElementoListo(webElement,10);
         webElement.click();
+
     }
 
     protected WebElement esperarElementoClickable(By locator, int segundos) {

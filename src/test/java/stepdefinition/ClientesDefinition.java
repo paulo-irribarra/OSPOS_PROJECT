@@ -16,8 +16,7 @@ public class ClientesDefinition {
 
     @And("hacer click en el boton {string}")
     public void hacerClickEnElBoton(String btnNuevoCliente) {
-        clientesPage.clickBtnAgregarCliente();
-        Assert.assertTrue("No se logra visualizar el formulario para crear un cliente", clientesPage.isVisibleTituloFormulario());
+        clientesPage.hacerClickEnElBotonNuevaOpcion(btnNuevoCliente);
     }
 
     @And("completo el formulario completo con todos los datos de forma correcta")
@@ -60,4 +59,7 @@ public class ClientesDefinition {
         clientesPage.esperarfiltradoCliente();
         clientesPage.eliminarCliente();
     }
+
+
+
 }

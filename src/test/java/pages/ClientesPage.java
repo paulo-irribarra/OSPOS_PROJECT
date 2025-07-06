@@ -138,13 +138,8 @@ public class ClientesPage extends BasePage {
         waitForVisibility(btnEliminar);
         btnEliminar.click();
         aceptarAlerta();
-
     }
-    public void aceptarAlerta(){
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
 
-    }
 
 
 }

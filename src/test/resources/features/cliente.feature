@@ -9,7 +9,7 @@ Feature: Cliente
 
   Scenario: Agregar Nuevo Cliente con los campos obligatorios
     And hacer click en la opcion "Clientes" en la barra horizontal
-    And hacer click en el boton "Nuevo CLiente"
+    And hacer click en el boton "Nuevo Cliente"
     And completo el formulario completo con todos los datos de forma correcta
       | Nombre   | Prueba Automatizada |
       | Apellido | Prueba Automatizada |
